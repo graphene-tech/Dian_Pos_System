@@ -7,6 +7,12 @@ struct Product{
     char name[20];
     float price;
 };
+struct CartItem{
+    struct Product prod;
+    int qty;
+};
+struct CartItem cart[10];
+int cart_count=0;
 
 struct Product inventory[10];
 int item_count=0;
@@ -51,6 +57,25 @@ void show_prices(){
         printf("%-10s  %s  %.2f\n",inventory[i].name,inventory[i].barcode,
         inventory[i].price);
     }
+}
+void add_to_cart(char input_code[]){
+    int i;
+    int found =0;
+
+    for (i=0;i<item_count;i++){
+        if(strcmp(inventory[i].barcode,input_code)==0){
+            found =1;
+            int j;
+            for(j=0;j<cart_count;j++){
+                if(strcmp(inventory[i].barcode,input_code)==0);
+            }
+            
+        }
+
+    }
+    
+
+
 }
 
 int main(){
