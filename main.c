@@ -67,8 +67,23 @@ void add_to_cart(char input_code[]){
             found =1;
             int j;
             for(j=0;j<cart_count;j++){
-                if(strcmp(inventory[i].barcode,input_code)==0);
+                if(strcmp(cart[j].prod.barcode,input_code)==0){
+                    cart[j].qty++;
+                    printf("%-10s %.2f *%d=%.2f",
+                        cart[j].prod.name,cart[j].prod.price,cart[j].qty,cart[j].prod.price*cart[j].qty);
+                    return;
+                }
+                cart[cart_count].prod=inventory[i];
+                cart[cart_count].qty=1;
+                cart_count++;
+                printf("%-10s %.2f *%d=%.2f\n",
+                        cart[j].prod.name,cart[j].prod.price,cart[j].qty,cart[j].prod.price*cart[j].qty );
+                        return;
             }
+            if(found=0){
+                printf("ERROR:code not found\n");
+            }
+
             
         }
 
