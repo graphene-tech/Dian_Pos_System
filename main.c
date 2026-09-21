@@ -68,24 +68,20 @@ void add_to_cart(char input_code[]){
             int j;
             for(j=0;j<cart_count;j++){
                 if(strcmp(cart[j].prod.barcode,input_code)==0){
-                    cart[j].qty++;
-                    printf("%-10s %.2f *%d=%.2f",
-                        cart[j].prod.name,cart[j].prod.price,cart[j].qty,cart[j].prod.price*cart[j].qty);
-                    return;
-                }
-                cart[cart_count].prod=inventory[i];
-                cart[cart_count].qty=1;
-                cart_count++;
-                printf("%-10s %.2f *%d=%.2f\n",
-                        cart[j].prod.name,cart[j].prod.price,cart[j].qty,cart[j].prod.price*cart[j].qty );
-                        return;
+                    cart[j].qty=cart[j].qty+1;
+                    printf("%-10s %.2f x%d=%.2f\n",
+                        inventory[i].name,inventory[i].price,cart[j].qty,inventory[i].price*cart[j].qty);
+                    return; }
             }
-            if(found=0){
+                    cart[cart_count].prod=inventory[i];
+                    cart[cart_count].qty=1;
+                    cart_count=cart_count+1;
+                    printf("%-10s %.2fx1=%.2f\n",
+                    inventory[i].name,inventory[i].price,inventory[i].price);
+                        return;}
+                    }
+            if(found==0){
                 printf("ERROR:code not found\n");
-            }
-
-            
-        }
 
     }
     
@@ -103,7 +99,7 @@ int main(){
 
     while (1){
         printf("> ");
-        scanf("%s",input);
+        scanf(" %s",input);
         if(strcmp(input,"exit") ==0 || strcmp(input,"quit")==0){
             printf("退出系统，再见!\n");
             break;
@@ -113,7 +109,7 @@ int main(){
 
         }
         else{
-            search_by_barcode(input);
+            add_to_cart(input);
         }
     }
     return 0;
