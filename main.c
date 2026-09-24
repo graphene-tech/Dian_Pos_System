@@ -84,10 +84,36 @@ void add_to_cart(char input_code[]){
                 printf("ERROR:code not found\n");
 
     }
-    
-
-
 }
+    void remove_from_cart(char input_code[]){
+        int j;
+        int k;
+        int found=0;
+
+        for(j=0;j<cart_count;j++){
+            if(strcmp(cart[j].prod.barcode,input_code)==0){
+                found=1;
+                if (cart[j].qty>1){
+                    cart[j].qty=cart[j].qty-1;
+                    printf("%-10s %.2f x%d=%.2f\n",
+                    cart[j].prod.name,cart[j].prod.price,cart[j].qty,cart[j].prod.price*cart[j].qty);
+                    return;
+                }
+                for(k=j;k<cart_count-1;k++){
+                    cart[k]=cart[k+1];
+                }
+                }
+                cart_count=cart_count-1;
+                printf("已删除商品");
+                break;
+                }
+
+                if(found==0){
+                    printf("Item not in the cart\n");
+                }
+            }
+    
+    
 
 int main(){
     system("chcp 65001");
@@ -108,6 +134,10 @@ int main(){
             show_prices();
 
         }
+        else if(input[0]=='-'){
+            remove_from_cart(input+1);
+        }
+    
         else{
             add_to_cart(input);
         }
