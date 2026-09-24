@@ -112,6 +112,13 @@ void add_to_cart(char input_code[]){
                     printf("Item not in the cart\n");
                 }
             }
+            void print_receipt(void){
+                int j;
+                printf("Item          Pri.Qty Amout\n");
+                printf("----------------------------\n");
+                printf("%-10s %.2f x%d=%.2f",
+                cart[j].prod.name,cart[j].prod.price,cart[j].qty,cart[j].prod.price*cart[j].qty);
+            }
     
     
 
@@ -136,6 +143,13 @@ int main(){
         }
         else if(input[0]=='-'){
             remove_from_cart(input+1);
+        }
+        else if(strcmp(input,"drop")==0){
+            cart_count=0;
+            printf("记录已清空");
+        }
+        else if(strcmp(input,"checkout")==0){
+            print_receipt();
         }
     
         else{
