@@ -99,14 +99,17 @@ void add_to_cart(char input_code[]){
                     cart[j].prod.name,cart[j].prod.price,cart[j].qty,cart[j].prod.price*cart[j].qty);
                     return;
                 }
+                if(cart[j].qty==1){
                 for(k=j;k<cart_count-1;k++){
                     cart[k]=cart[k+1];
                 }
-                }
                 cart_count=cart_count-1;
-                printf("已删除商品");
-                break;
+                printf("商品已删除\n");
+                return;
                 }
+                }
+                }
+            
 
                 if(found==0){
                     printf("Item not in the cart\n");
@@ -114,10 +117,16 @@ void add_to_cart(char input_code[]){
             }
             void print_receipt(void){
                 int j;
+                float total=0;
                 printf("Item          Pri.Qty Amout\n");
                 printf("----------------------------\n");
-                printf("%-10s %.2f x%d=%.2f",
+                for(j=0;j<cart_count;j++){
+                printf("%-10s %.2f x%d=%.2f\n",
                 cart[j].prod.name,cart[j].prod.price,cart[j].qty,cart[j].prod.price*cart[j].qty);
+                total=total+cart[j].prod.price+cart[j].qty;}
+                printf("------------------------------\n");
+                printf("Total             = %.2f\n",total);
+                return;
             }
     
     
